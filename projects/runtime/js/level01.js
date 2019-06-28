@@ -11,32 +11,32 @@ var level01 = function (window) {
 
         // this data will allow us to define all of the
         // behavior of our game
-     
         var levelData = {
             name: "Robot Romp",
             number: 1, 
             speed: -3,
             gameItems: [
-                {type: 'bananaBoy',x:400,y:groundY},
-                {type: 'bananaBoy',x:600,y:groundY},
-                {type: 'bananaBoy',x:900,y:groundY},
-        ],
+                {type: 'banana',x:400,y:groundY-40},
+                {type: 'banana',x:600,y:groundY-115},
+                {type: 'banana',x:900,y:groundY-40}
+            ],
             enemies: [
-                {type: 'floatingheads',x:1000,y:groundY - 50,speed:10},
-            	{type: 'floatingheads',x:2000,y:groundY - 50,speed:10},
-            	{type: 'floatingheads',x:3000,y:groundY - 50,speed:10},
-            ], 
-           rewards: [ 
-               {type: 'portalgun', x:700,y:groundY -70}]
+                {type: 'head',x:3000,y:groundY - 40,speed:5},
+                {type: 'head',x:5000,y:groundY - 40,speed:5},
+            ],
+            rewards: [
+                {type: 'cook', x:975,y:groundY - 145},
+                {type: 'cook', x:1475,y:groundY - 150},
+                {type: 'cook', x:1725,y:groundY - 145},
+        ],    
         };
-        
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // BEGIN EDITING YOUR CODE HERE
-        function createbananaBoy (x,y) {
-            var hitZoneSize = 25;
+        function createBanana (x,y) {
+var hitZoneSize = 5;
 var damageFromObstacle = 10;
 var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
 myObstacle.x = x;
@@ -44,72 +44,79 @@ myObstacle.y = y;
 game.addGameItem(myObstacle); 
 var obstacleImage = draw.bitmap('img/bana.png');
 myObstacle.addChild(obstacleImage);
-obstacleImage.x = -100;
-obstacleImage.y = -250;
-myObstacle.scaleX = .2
+obstacleImage.x = -25;
+obstacleImage.y = -25;
+myObstacle.scaleX = .20;
 myObstacle.scaleY = .2
 }
 
-for (var i = 0; i < levelData.gameItems.length; i++) {
-    var gameItemsX = levelData.gameItems[i].x
-    var gameItemsY = levelData.gameItems[i].y
-    createbananaBoy(gameItemsX, gameItemsY)
-}
-
-function createEnemy (x, y) {
-var enemy =  game.createGameItem('enemy',25,);
-var floatingheads = draw.bitmap('img/head.png')
-floatingheads.x = -300;
-floatingheads.y = -300;
-enemy.addChild(floatingheads);
-enemy.x = x
-enemy.y = y
+function createEnemy (x, y, speed) {
+var enemy =  game.createGameItem('enemy',25);
+var head = draw.bitmap('img/head.png');
+head.x = -25;
+head.y = -25;
+enemy.addChild(head);
+enemy.x = x;
+enemy.y = groundY-50;
 game.addGameItem(enemy);
-enemy.velocityX = -1;
-enemy.scaleX = .3;
-enemy.scaleY = .3;
+enemy.scaleX = .4;
+enemy.scaleY = .4;
 
-enemy.onPlayerCollision = function () {
-    console.log("The enemy has hit Halle");
-    game.changeIntegrity(-10)
-}
-enemy.onProjectileCollision = function () {
-    console.log( "Halle has hit the enemy")
-    game.increaseScore(1000);
-    enemy.fadeOut();
-}
+enemy.velocityX  = -speed
 
 
-};
-for (var i = 0; i < levelData.enemies.length; i++) {
-    var gamezItemsX = levelData.enemies[i].x
-    var gamezItemsY = levelData.enemies[i].y
-    var newvar = levelData.enemies[i].speed;
-    createEnemy(gamezItemsX, gamezItemsY, newvar)
+        enemy.onPlayerCollision = function() {
+         game.changeIntegrity(-10);
+        };
+
+         enemy.onProjectileCollision = function() {
+         game.increaseScore(3500);
+         enemy.fadeOut();
+    };
 }
-function createPortalGun (x, y) {
-    var rewards = game.createGameItem('reward', 16);
-    var portalgun = draw.bitmap('img/ giphy.png')
-    portalgun.x = -15
-    portalgun.y = -15
-    rewards.addChild(portalgun);
-    rewards.x = x
-    rewards.y = y
-    game.addGameItem(rewards);
-    rewards.velocityX = -2;
+function createReward(x,y){
+    var reward = game.createGameItem('reward',16);    
+    var cook = draw.bitmap('img/pg.png');
+    cook.x = -300;
+    cook.y = -300;
+    reward.addChild(cook);
+    reward.x = x;
+    reward.y = y;
+    game.addGameItem(reward);
+    reward.scaleX = .1;
+    reward.scaleY = .1;
     
-    rewards.onPlayerCollision = function () {
-        game.increaseScore(7000);
-        rewards.fadeOut();
+    reward.velocityX = -2;
+    reward.onPlayerCollision = function() {
+        game.increaseScore(1000);
+        reward.fadeOut();
+    };
+
+}    
+
+      
+    for (var yeet = 0; yeet < levelData.gameItems.length; yeet++) {
+        var gameItemX = levelData.gameItems[yeet].x;
+        var gameItemY = levelData.gameItems[yeet].y;
+        createBanana(gameItemX, gameItemY);
     }
     
-}
-createPortalGun(100, 100);
-}
-
-
+    for (yeet = 0; yeet < levelData.enemies.length; yeet++){
+        var enemieX = levelData.enemies[yeet].x;
+        var enemieY = levelData.enemies[yeet].y;
+        var oop = levelData.enemies[yeet].speed;
+        createEnemy(enemieX,enemieY,oop);
     
+}   
+    for (yeet = 0; yeet < levelData.rewards.length; yeet++){
+    var rewardX = levelData.rewards[yeet].x;
+    var rewardY = levelData.rewards[yeet].y;
+    createReward(rewardX,rewardY);
+}
+
+
 };
+}
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
     (typeof process.versions.node !== 'undefined')) {
