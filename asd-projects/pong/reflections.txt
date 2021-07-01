@@ -1,0 +1,23 @@
+## User Story / Gameplay
+- Describe the gameplay // two paddles will hit the ball back and forth and the ball will bounce off the paddle and if it hits the edge the player who hit it gets a point 
+- What are the conditions when the game begins? // if game is running allow the ball to be hit back and forth until the ball goes out of bounds 
+- Does the game have an end? If so, what are the conditions for when it ends? // if a player reaches a certain score threshold the game stops
+- What `if`s will there be? - if game is running allow ball to be hit back and forth, if ball collides with either paddles allow it to bounce off, if game ends stop program, if ball hits the edge of the board restart the board and give the player who hit is a point, if key is pressed move either paddle 
+
+### Visual Game Components:
+- What are the visual game components? For example, in Bouncing Box, the game components were the board and the box. // the board, the ball, and the paddles
+  - Which will be static? (the board) // the board
+  - Which will be animated? (the box) // the paddles and the ball
+- What data will you need to manage each game component? For example, in Bouncing Box, the data values were `positionX`, `speedX`, and `points`. //. position of ball, speed of balls, position of paddles, speed of paddles, either players score
+### Events / Logic 
+- What events will occur in this game? (timer events, keyboard events, clicking events?) // keyup and keydown will occur to move either paddle
+- How do those events affect the data of the program? // certain events will change variables such as position and speed 
+- For each "event", write out the high-level logic of what will happen. It is better (and tricky) to be as specific as you can while remaining high-level!
+1. Upon key press either one of the paddles will move in the y direction  
+2. upon impact the ball will bounce off the paddle
+    a ) The direction of the ball will change as well as the speed 
+
+For example: in bouncing box, when the box is clicked:
+1. The speed is increased
+2. The point total goes up by 1 and is displayed on the box
+3. The position of the box is reset to 0
