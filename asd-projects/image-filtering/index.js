@@ -4,7 +4,9 @@ $(document).ready(function(){
     const $display = $('#display');
 
     // TODO: Call your apply function(s) here
-applyFilter(); 
+applyFilter(reddify) ;
+applyFilterNoBackground(decreaseBlue); 
+applyFilterNoBackground(increaseGreenByBlue);
 
 
 
@@ -20,20 +22,46 @@ applyFilter();
 
 
 
-// TODO 1 & 3: Create the applyFilter function here
-function applyFilter() {
-for ( i = 0; i < image; i++) {
-    for (i = 0; i < image; i++) {
-        var rgbString;
-        var rgbNumbers = rgbStringToArray(rgbString)
+// TODO 1 & 2: Create the applyFilter function here
+function applyFilter(filterFunction) {
+for ( i = 0; i < image.length; i++) {
+    for (j = 0; j < image[i].length; j++) {
+        var rgbString = image[i][j];
+        var rgbNumbers = rgbStringToArray(rgbString);
+        filterFunction(rgbNumbers); 
+        rgbString = rgbArrayToString(rgbNumbers);
+        image[i][j] = rgbString;
     }
 }
 }; 
 
 // TODO 5: Create the applyFilterNoBackground function
+function applyFilterNoBackground(filterFunction) {
+    for ( i = 0; i < image.length; i++) {
+        for (j = 0; j < image[i].length; j++) {
+            var rgbString = image[i][j];
+            var rgbNumbers = rgbStringToArray(rgbString);
+            if (rgbString !== rgbArrayToString(rgbStringToArray(image[0][0]))) {
+                filterFunction(rgbNumbers); 
+            }
+              
+             
+            rgbString = rgbArrayToString(rgbNumbers);
+            image[i][j] = rgbString; 
+            
+        }
+    }
+}
 
-
-// TODO 2 & 4: Create filter functions
-
+// TODO 3 & 4: Create filter functions
+function reddify(array) {
+    array[RED] = 255;
+}
+function decreaseBlue(array) {
+    array[BLUE] -= Math.max(30); 
+}
+function increaseGreenByBlue(array) {
+    array[GREEN] += Math.min(255); 
+}
 
 // CHALLENGE code goes below here
