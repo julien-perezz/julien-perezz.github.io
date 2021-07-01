@@ -57,8 +57,8 @@ var init = function (window) {
             } 
 
             // TODO 5b) if the circle has gone past of the TOP side of the screen then place it on the BOTTOM
-            if ( circle.y > canvas.height) {
-                circle.y = 0;
+            if ( circle.y < 0) {
+                circle.y = 10;
                 
             }
             // TODO 5c) if the circle has gone past of the BOTTOM side of the screen then place it OFF-SCREEN TOP

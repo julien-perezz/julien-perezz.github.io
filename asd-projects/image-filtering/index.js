@@ -4,7 +4,7 @@ $(document).ready(function(){
     const $display = $('#display');
 
     // TODO: Call your apply function(s) here
-
+applyFilter(); 
 
 
 
@@ -16,8 +16,14 @@ $(document).ready(function(){
 // "apply" and "filter" functions should go below here //
 /////////////////////////////////////////////////////////
 
-// TODO 1 & 3: Create the applyFilter function here
 
+
+
+
+// TODO 1 & 3: Create the applyFilter function here
+function applyFilter() {
+
+}; 
 
 // TODO 5: Create the applyFilterNoBackground function
 
