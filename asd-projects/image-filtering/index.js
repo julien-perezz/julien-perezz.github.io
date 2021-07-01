@@ -56,12 +56,13 @@ function applyFilterNoBackground(filterFunction) {
 // TODO 3 & 4: Create filter functions
 function reddify(array) {
     array[RED] = 255;
+    
 }
 function decreaseBlue(array) {
-    array[BLUE] -= Math.max(30); 
+    array[BLUE] = Math.max(0, array[BLUE] - 70); 
 }
 function increaseGreenByBlue(array) {
-    array[GREEN] += Math.min(255); 
+    array[GREEN] = Math.min(255, array[GREEN] + array[BLUE]); 
 }
 
 // CHALLENGE code goes below here
